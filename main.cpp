@@ -1,18 +1,21 @@
 #include <vector>
 #include <string>
 #include <optional>
+#include <iostream>
 
 class Piece 
 {
 	private:
 		int color;
 		bool is_upgradable;
+		std::string name;
 
 	public:
-		Piece(int color, bool is_upgradable)
+		Piece(int color, bool is_upgradable, std::string name)
 		{
 			this->color = color;
 			this->is_upgradable = is_upgradable;
+			this->name = name;
 		}
 
 		int get_color()
@@ -29,6 +32,11 @@ class Piece
 		{
 			this->is_upgradable = new_value;
 		}
+
+		std::string get_name()
+		{
+			return this->name;
+		}
 };
 
 class Space
@@ -36,8 +44,16 @@ class Space
 	private:
 		std::optional<Piece*> piece;
 		bool is_avaliable = true;
+		int x_position;
+		int y_position;
 
 	public:
+		Space(int x, int y)
+		{
+			this->x_position = x;
+			this->y_position = y;
+		}
+
 		bool check_is_avaliable()
 		{
 			return is_avaliable;
@@ -54,6 +70,21 @@ class Space
 			this->piece.reset();
 			this->is_avaliable = true;
 		}
+
+		Piece* get_piece()
+		{
+			return this->piece.value();
+		}
+
+		int get_x()
+		{
+			return this->x_position;
+		}
+
+		int get_y()
+		{
+			return this->y_position;
+		}
 };
 
 int main()
@@ -69,25 +100,25 @@ int main()
 	{
 		for(int row_i = 0; row_i <= 7; row_i++)
 		{
-			table[line_i][row_i] = new Space();
+			table[line_i][row_i] = new Space(row_i, line_i);
 		}
 	}
 
 	// white pieces - player 1
-	Piece* white_king = new Piece(WHITE, false); // 1
-	Piece* white_queen = new Piece(WHITE, false); // 1
-	Piece* white_pawn = new Piece(WHITE, true); // 8
-	Piece* white_bishop = new Piece(WHITE, false); // 2
-	Piece* white_knight = new Piece(WHITE, false); // 2
-	Piece* white_rook = new Piece(WHITE, false); // 2
+	Piece* white_king = new Piece(WHITE, false, "king"); // 1
+	Piece* white_queen = new Piece(WHITE, false, "queen"); // 1
+	Piece* white_pawn = new Piece(WHITE, true, "pawn"); // 8
+	Piece* white_bishop = new Piece(WHITE, false, "bishop"); // 2
+	Piece* white_knight = new Piece(WHITE, false, "knight"); // 2
+	Piece* white_rook = new Piece(WHITE, false, "rook"); // 2
 
 	// black pieces - player 2
-	Piece* black_king = new Piece(BLACK, false); // 1
-	Piece* black_queen = new Piece(BLACK, false); // 1
-	Piece* black_pawn = new Piece(BLACK, true); // 8
-	Piece* black_bishop = new Piece(BLACK, false); // 2
-	Piece* black_knight = new Piece(BLACK, false); // 2
-	Piece* black_rook = new Piece(BLACK, false); // 2
+	Piece* black_king = new Piece(BLACK, false, "king"); // 1
+	Piece* black_queen = new Piece(BLACK, false, "queen"); // 1
+	Piece* black_pawn = new Piece(BLACK, true, "pawn"); // 8
+	Piece* black_bishop = new Piece(BLACK, false, "bishop"); // 2
+	Piece* black_knight = new Piece(BLACK, false, "knight"); // 2
+	Piece* black_rook = new Piece(BLACK, false, "rook"); // 2
 	
 	for(int i = 0; i <= 7; i++)
 	{
@@ -100,7 +131,14 @@ int main()
 	{
 		for(int x = 0; x <= 7; x++)
 		{
-			printf(table[y][x]->check_is_avaliable() ? "[ ]" : "[x]");
+			if(!table[y][x]->check_is_avaliable())
+			{
+				std::cout << "[" << table[y][x]->get_piece()->get_name()[0] << "]";
+			}
+			else
+			{
+				printf("[ ]");
+			}
 		}
 
 		printf("\n");

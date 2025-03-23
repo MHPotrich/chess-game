@@ -95,5 +95,16 @@ int main()
 		table[6][i]->change_piece(black_pawn);
 	}
 
+	// show table
+	for(int y = 0; y <= 7; y++)
+	{
+		for(int x = 0; x <= 7; x++)
+		{
+			printf(table[y][x]->check_is_avaliable() ? "[ ]" : "[x]");
+		}
+
+		printf("\n");
+	}
+
 	return 0;
 }

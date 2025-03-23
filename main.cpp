@@ -120,15 +120,44 @@ int main()
 	Piece* black_knight = new Piece(BLACK, false, "knight"); // 2
 	Piece* black_rook = new Piece(BLACK, false, "rook"); // 2
 	
+	// positionate pawns
 	for(int i = 0; i <= 7; i++)
 	{
 		table[1][i]->change_piece(white_pawn);
 		table[6][i]->change_piece(black_pawn);
 	}
+	
+	// positionate rooks
+	table[0][0]->change_piece(white_rook);
+	table[0][7]->change_piece(white_rook);
+	table[7][0]->change_piece(black_rook);
+	table[7][7]->change_piece(black_rook);
+
+	// positionate knights
+	table[0][1]->change_piece(white_knight);
+	table[0][6]->change_piece(white_knight);
+	table[7][1]->change_piece(black_knight);
+	table[7][6]->change_piece(black_knight);
+
+	// positionate bishop
+	table[0][2]->change_piece(white_bishop);
+       	table[0][5]->change_piece(white_bishop);
+	table[7][2]->change_piece(black_bishop);
+	table[7][5]->change_piece(black_bishop);
+
+	// positionate queen
+	table[0][3]->change_piece(white_queen);
+	table[7][3]->change_piece(black_queen);
+
+	// positionate king
+	table[0][4]->change_piece(white_king);
+	table[7][4]->change_piece(black_king);	
 
 	// show table
 	for(int y = 0; y <= 7; y++)
 	{
+		std::cout << y + 1;
+
 		for(int x = 0; x <= 7; x++)
 		{
 			if(!table[y][x]->check_is_avaliable())

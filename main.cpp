@@ -3,6 +3,9 @@
 #include <optional>
 #include <iostream>
 
+#define X_TABLE_SIZE 7
+#define Y_TABLE_SIZE 7
+
 class Piece 
 {
 	private:
@@ -94,11 +97,11 @@ int main()
 		BLACK
 	};
 
-	Space* table[7][7];
+	Space* table[Y_TABLE_SIZE][X_TABLE_SIZE];
 
-	for(int line_i = 0; line_i <= 7; line_i++)
+	for(int line_i = 0; line_i <= Y_TABLE_SIZE; line_i++)
 	{
-		for(int row_i = 0; row_i <= 7; row_i++)
+		for(int row_i = 0; row_i <= X_TABLE_SIZE; row_i++)
 		{
 			table[line_i][row_i] = new Space(row_i, line_i);
 		}
@@ -121,7 +124,7 @@ int main()
 	Piece* black_rook = new Piece(BLACK, false, "rook"); // 2
 	
 	// positionate pawns
-	for(int i = 0; i <= 7; i++)
+	for(int i = 0; i <= X_TABLE_SIZE; i++)
 	{
 		table[1][i]->change_piece(white_pawn);
 		table[6][i]->change_piece(black_pawn);
@@ -154,11 +157,11 @@ int main()
 	table[7][4]->change_piece(black_king);	
 
 	// show table
-	for(int y = 0; y <= 7; y++)
+	for(int y = 0; y <= Y_TABLE_SIZE; y++)
 	{
 		std::cout << y + 1;
 
-		for(int x = 0; x <= 7; x++)
+		for(int x = 0; x <= X_TABLE_SIZE; x++)
 		{
 			if(!table[y][x]->check_is_avaliable())
 			{

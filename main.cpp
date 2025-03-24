@@ -5,6 +5,24 @@
 
 #define X_TABLE_SIZE 7
 #define Y_TABLE_SIZE 7
+#define MAX_PLAYER_PIECES_QUANTITY 16
+
+class Player
+{
+	private:
+		int pieces_color;
+		int total_pieces = MAX_PLAYER_PIECES_QUANTITY;
+	public:
+		Player(int pieces_color)
+		{
+			this->pieces_color = pieces_color;
+		}
+
+		void decrement_total_pieces(int quantity)
+		{
+			this->total_pieces -= quantity;
+		}
+};
 
 class Piece 
 {

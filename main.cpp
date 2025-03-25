@@ -126,6 +126,27 @@ class Space
 		}
 };
 
+class Screen
+{
+	private:
+
+	public:
+		void show_start_screen()
+		{
+		
+		}
+
+		void show_in_game_screen()
+		{
+
+		}
+
+		void show_end_screen()
+		{
+
+		}
+};
+
 int main()
 {
 	enum piece_color: int {

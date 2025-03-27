@@ -2,9 +2,10 @@
 #include <string>
 #include <optional>
 #include <iostream>
+#include <array>
 
-#define X_TABLE_SIZE 7
-#define Y_TABLE_SIZE 7
+#define X_TABLE_SIZE 8
+#define Y_TABLE_SIZE 8
 #define MAX_PLAYER_PIECES_QUANTITY 16
 
 class Player
@@ -129,8 +130,14 @@ class Space
 class Screen
 {
 	private:
+		std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table;
 
 	public:
+		Screen(std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table)
+		{
+			this->table = table;
+		}
+
 		void show_start_screen()
 		{
 		
@@ -138,6 +145,25 @@ class Screen
 
 		void show_in_game_screen()
 		{
+			// show table
+			for(int y = 0; y < Y_TABLE_SIZE; y++)
+			{
+				std::cout << y + 1;
+
+				for(int x = 0; x < X_TABLE_SIZE; x++)
+				{
+					if(!this->table[y][x]->check_is_empty())
+					{
+						std::cout << "[" << this->table[y][x]->get_piece()->get_name()[0] << "]";
+					}
+					else
+					{
+						printf("[ ]");
+					}
+				}
+
+				printf("\n");
+			}
 
 		}
 
@@ -154,7 +180,7 @@ int main()
 		BLACK
 	};
 
-	Space* table[Y_TABLE_SIZE][X_TABLE_SIZE];
+	std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table;
 
 	for(int line_i = 0; line_i <= Y_TABLE_SIZE; line_i++)
 	{
@@ -215,26 +241,10 @@ int main()
 	// positionate king
 	table[0][4]->change_piece(white_king);
 	table[7][4]->change_piece(black_king);	
+	
+	Screen* screen = new Screen(table);
 
-	// show table
-	for(int y = 0; y <= Y_TABLE_SIZE; y++)
-	{
-		std::cout << y + 1;
-
-		for(int x = 0; x <= X_TABLE_SIZE; x++)
-		{
-			if(!table[y][x]->check_is_empty())
-			{
-				std::cout << "[" << table[y][x]->get_piece()->get_name()[0] << "]";
-			}
-			else
-			{
-				printf("[ ]");
-			}
-		}
-
-		printf("\n");
-	}
-
+	screen->show_in_game_screen();
+	
 	return 0;
 }

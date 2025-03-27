@@ -182,9 +182,9 @@ int main()
 
 	std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table;
 
-	for(int line_i = 0; line_i <= Y_TABLE_SIZE; line_i++)
+	for(int line_i = 0; line_i < Y_TABLE_SIZE; line_i++)
 	{
-		for(int row_i = 0; row_i <= X_TABLE_SIZE; row_i++)
+		for(int row_i = 0; row_i < X_TABLE_SIZE; row_i++)
 		{
 			table[line_i][row_i] = new Space(row_i, line_i);
 		}
@@ -210,7 +210,7 @@ int main()
 	Piece* black_rook = new Piece(BLACK, false, "rook", player_two); // 2
 	
 	// positionate pawns
-	for(int i = 0; i <= X_TABLE_SIZE; i++)
+	for(int i = 0; i < X_TABLE_SIZE; i++)
 	{
 		table[1][i]->change_piece(white_pawn);
 		table[6][i]->change_piece(black_pawn);

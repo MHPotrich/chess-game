@@ -14,6 +14,17 @@ enum piece_color: int {
 	BLACK	
 };
 
+struct TablePosition
+{
+	int x;
+	int y;
+
+	TablePosition(int x, int y)
+	{
+		this->x = x;
+		this->y = y;
+	}	
+};
 
 class Piece 
 {

@@ -131,6 +131,20 @@ class Screen
 {
 	private:
 		std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table;
+		
+		void show_header()
+		{
+			std::cout << "remaning pieces player 1: " << 0 << std::endl;
+			std::cout << "remaning pieces player 1: " << 0 << std::endl;
+			printf("\n");
+		}
+
+		void show_footer()
+		{
+			printf("\n");
+			printf("select piece(example of input: 1b): ");
+			printf("\n");
+		}
 
 	public:
 		Screen(std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table)
@@ -145,6 +159,8 @@ class Screen
 
 		void show_in_game_screen()
 		{
+			show_header();	
+
 			// show table
 			for(int y = 0; y < Y_TABLE_SIZE; y++)
 			{
@@ -165,6 +181,8 @@ class Screen
 				printf("\n");
 			}
 
+			std::cout << "  a  b  c  d  e  f  g  h" << std::endl;
+			show_footer();
 		}
 
 		void show_end_screen()
@@ -173,7 +191,7 @@ class Screen
 		}
 };
 
-int main()
+std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> create_table()
 {
 	enum piece_color: int {
 		WHITE,
@@ -240,8 +258,15 @@ int main()
 
 	// positionate king
 	table[0][4]->change_piece(white_king);
-	table[7][4]->change_piece(black_king);	
-	
+	table[7][4]->change_piece(black_king);
+
+	return table;	
+}	
+
+int main()
+{
+	std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table = create_table(); 
+		
 	Screen* screen = new Screen(table);
 
 	screen->show_in_game_screen();

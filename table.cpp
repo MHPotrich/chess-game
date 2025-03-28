@@ -1,13 +1,8 @@
 #include <array>
 #include "table.h"
 
-std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> create_table()
+std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> create_table(Player* player_one, Player* player_two)
 {
-	enum piece_color: int {
-		WHITE,
-		BLACK
-	};
-
 	std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table;
 
 	for(int line_i = 0; line_i < Y_TABLE_SIZE; line_i++)
@@ -17,9 +12,6 @@ std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> create_table()
 			table[line_i][row_i] = new Space(row_i, line_i);
 		}
 	}
-
-	Player* player_one = new Player(WHITE);
-	Player* player_two = new Player(BLACK);
 
 	// white pieces - player 1
 	Piece* white_king = new Piece(WHITE, false, "king", player_one); // 1

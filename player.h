@@ -23,6 +23,11 @@ class Player
 		{
 			return this->total_pieces > 0;
 		}
+
+		int get_total_pieces()
+		{
+			return this->total_pieces;
+		}
 };
 
 #endif /* PLAYER_H */

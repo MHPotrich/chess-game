@@ -9,6 +9,12 @@
 #define X_TABLE_SIZE 8
 #define Y_TABLE_SIZE 8
 
+enum piece_color: int {
+	WHITE,
+	BLACK	
+};
+
+
 class Piece 
 {
 	private:
@@ -106,6 +112,6 @@ class Space
 		}
 };
 
-std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> create_table();
+std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> create_table(Player* player_one, Player* player_two);
 
 #endif /* TABLE_H */

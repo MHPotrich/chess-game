@@ -1,6 +1,8 @@
 #include <array>
 #include <iostream>
+#include <string>
 #include "table.h"
+#include "player.h"
 
 #ifndef TERMINAL_SCREEN
 #define TERMINAL_SCREEN
@@ -12,25 +14,44 @@ class Screen
 {
 	private:
 		std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table;
-		
+		Player* player_one;
+		Player* player_two;
+		std::string piece_position_input = "";
+		std::string destination_position_input = "";
+
 		void show_header()
 		{
-			std::cout << "remaning pieces player 1: " << 0 << std::endl;
-			std::cout << "remaning pieces player 1: " << 0 << std::endl;
+			std::cout << "remaning pieces player 1: " << this->player_one->get_total_pieces() << std::endl;
+			std::cout << "remaning pieces player 2: " << this->player_two->get_total_pieces() << std::endl;
 			printf("\n");
+		}
+
+		void reset_input()
+		{
+			this->piece_position_input = "";
+			this->destination_position_input = "";
 		}
 
 		void show_footer()
 		{
-			printf("\n");
-			printf("select piece(example of input: 1b): ");
-			printf("\n");
+			if(this->piece_position_input.length() > 0){
+				std::cout << "move to(example of input: 1b): ";
+				std::cin >> destination_position_input;
+				this->reset_input();
+				return;
+			}
+
+			std::cout << "select piece(example of input: 1b): ";
+			std::cin >> piece_position_input;
+			std::cout << std::endl;
 		}
 
 	public:
-		Screen(std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table)
+		Screen(std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table, Player* player_one, Player* player_two)
 		{
 			this->table = table;
+			this->player_one = player_one;
+			this->player_two = player_two;
 		}
 
 		void show_start_screen()

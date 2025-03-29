@@ -44,10 +44,21 @@ class Screen
 				std::cin >> destination_position_input;
 				
 				TablePosition* destination_piece_position = convert_input(destination_position_input);
-				Space* selected_piece_space = this->table[selected_piece_position->x][selected_piece_position->y];
-				Space* destination_piece_space = this->table[destination_piece_position->x][destination_piece_position->y];
+				Space* selected_piece_space = this->table[selected_piece_position->y][selected_piece_position->x];
+				Space* destination_piece_space = this->table[destination_piece_position->y][destination_piece_position->x];
+			
+				std::cout << "selected_piece_space " << "x: " << selected_piece_position->x << " y: " << selected_piece_position->y << std::endl;
+				std::cout << "destination_piece_space " << "x: " << destination_piece_position->x << " y: " << destination_piece_position->y << std::endl;
+
+				if(selected_piece_space->check_is_empty())
+				{
+					std::cout << "There's not piece in this space" << std::endl;
+					this->reset_input();
+					return;
+				}
+
 				Piece* selected_piece = selected_piece_space->get_piece();
-				
+
 				selected_piece_space->remove_piece();
 				destination_piece_space->change_piece(selected_piece);
 				

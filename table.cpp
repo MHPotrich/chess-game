@@ -91,6 +91,8 @@ TablePosition* convert_input(std::string raw_input)
 {
 	int x = raw_input.data()[0] - '0';
 	int y = convert_to_number(raw_input.data()[1]); 
+	
+	x += 1;
 
 	return new TablePosition(x, y);
 }

@@ -125,4 +125,8 @@ class Space
 
 std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> create_table(Player* player_one, Player* player_two);
 
+int convert_to_number(char number);
+
+TablePosition* convert_input(std::string raw_input);
+
 #endif /* TABLE_H */

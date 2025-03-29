@@ -37,12 +37,18 @@ class Screen
 			if(this->piece_position_input.length() > 0){
 				std::cout << "move to(example of input: 1b): ";
 				std::cin >> destination_position_input;
+
+				convert_input(destination_position_input);
+
 				this->reset_input();
 				return;
 			}
 
 			std::cout << "select piece(example of input: 1b): ";
 			std::cin >> piece_position_input;
+
+			convert_input(piece_position_input);
+
 			std::cout << std::endl;
 		}
 

@@ -1,4 +1,6 @@
 #include <array>
+#include <cctype>
+#include <iostream>
 #include "table.h"
 
 std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> create_table(Player* player_one, Player* player_two)
@@ -63,4 +65,32 @@ std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> create_table(Player* 
 	table[7][4]->change_piece(black_king);
 
 	return table;	
-}	
+}
+
+int convert_to_number(char number)
+{
+	if(std::isupper(number)) number = std::tolower(number);	
+	
+	switch(number)
+	{
+		case 'a': return 0;
+		case 'b': return 1;
+		case 'c': return 2;
+		case 'd': return 3;
+		case 'e': return 4;
+		case 'f': return 5;
+		case 'g': return 6;
+		case 'h': return 7; 
+	};
+
+	return 0;
+}
+
+
+TablePosition* convert_input(std::string raw_input)
+{
+	int x = raw_input.data()[0] - '0';
+	int y = convert_to_number(raw_input.data()[1]); 
+
+	return new TablePosition(x, y);
+}

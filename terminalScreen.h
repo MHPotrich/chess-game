@@ -46,13 +46,12 @@ class Screen
 				TablePosition* destination_piece_position = convert_input(destination_position_input);
 				Space* selected_piece_space = this->table[selected_piece_position->y][selected_piece_position->x];
 				Space* destination_piece_space = this->table[destination_piece_position->y][destination_piece_position->x];
-			
-				std::cout << "selected_piece_space " << "x: " << selected_piece_position->x << " y: " << selected_piece_position->y << std::endl;
-				std::cout << "destination_piece_space " << "x: " << destination_piece_position->x << " y: " << destination_piece_position->y << std::endl;
 
 				if(selected_piece_space->check_is_empty())
 				{
 					std::cout << "There's not piece in this space" << std::endl;
+					std::cout << std::endl;
+
 					this->reset_input();
 					return;
 				}
@@ -105,7 +104,7 @@ class Screen
 				printf("\n");
 			}
 
-			std::cout << "  a  b  c  d  e  f  g  h" << std::endl;
+			std::cout << "  a  b  c  d  e  f  g  h" << std::endl << std::endl;
 		}
 
 	public:

@@ -1,5 +1,6 @@
 #include <string>
 #include <array>
+#include <vector>
 #include <optional>
 #include "player.h"
 
@@ -12,6 +13,26 @@
 enum piece_color: int {
 	WHITE,
 	BLACK	
+};
+
+class PieceMovement
+{
+	public:
+		int front_squares = 0;
+		int left_squares = 0;
+		int right_squares = 0;
+		int front_left_squares = 0;
+		int front_right_squares = 0;
+		int back_squares = 0;
+		int back_left_squares = 0;
+		int back_right_squares = 0;
+		bool is_fixed_squares = false;
+		bool only_not_empty = false;
+		
+		bool is_moviment_valid()
+		{
+			return true;
+		}
 };
 
 struct TablePosition
@@ -33,6 +54,7 @@ class Piece
 		bool is_upgradable;
 		std::string name;
 		Player* owner;
+		std::vector<PieceMovement*> allowed_movements;
 
 	public:
 		Piece(int color, bool is_upgradable, std::string name, Player* player)
@@ -41,6 +63,13 @@ class Piece
 			this->is_upgradable = is_upgradable;
 			this->name = name;
 			this->owner = player;
+			
+			if(name == "pawn"){
+				PieceMovement* to_front = new PieceMovement();
+				to_front->only_not_empty = true;
+				to_front->front_squares = 1;
+				this->allowed_movements.push_back(to_front);
+			}
 		}
 
 		int get_color()

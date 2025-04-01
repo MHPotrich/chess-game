@@ -131,6 +131,11 @@ class Piece
 		{
 			return this->owner;
 		}
+
+		std::vector<PieceMovement*> get_allowed_movements()
+		{
+			return this->allowed_movements;
+		}
 };
 
 class Space

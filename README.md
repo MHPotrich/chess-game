@@ -1,4 +1,4 @@
-# chess-project
+# chess-game
 A chess game that can be played through the terminal.
 
 ## Compilation

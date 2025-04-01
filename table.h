@@ -17,7 +17,7 @@ enum piece_color: int {
 
 class PieceMovement
 {
-	public:
+	private:
 		int front_squares = 0;
 		int left_squares = 0;
 		int right_squares = 0;
@@ -28,10 +28,36 @@ class PieceMovement
 		int back_right_squares = 0;
 		bool is_fixed_squares = false;
 		bool only_not_empty = false;
-		
-		bool is_moviment_valid()
+
+	public:
+		PieceMovement(int left, int front, int right, int back)
 		{
-			return true;
+			this->front_squares = front;
+			this->left_squares = left;
+			this->right_squares = right;
+			this->back_squares = back;
+		}
+
+		PieceMovement(int back_left, int left, int front_left, int front, int front_right, int right, int back_right, int back)
+		{
+			this->front_squares = front;
+			this->left_squares = left;
+			this->right_squares = right;
+			this->back_squares = back;
+			this->back_left_squares = back_left;
+			this->front_left_squares = front_left;
+			this->front_right_squares = front_right;
+			this->back_right_squares = back_right;
+		}
+
+		void set_is_fixed_squares(bool new_value)
+		{
+			this->is_fixed_squares = new_value;
+		}
+
+		void set_only_not_empty(bool new_value)
+		{
+			this->only_not_empty = new_value;
 		}
 };
 
@@ -64,11 +90,20 @@ class Piece
 			this->name = name;
 			this->owner = player;
 			
-			if(name == "pawn"){
-				PieceMovement* to_front = new PieceMovement();
-				to_front->only_not_empty = true;
-				to_front->front_squares = 1;
+			if(name == "pawn")
+			{
+				PieceMovement* to_front = new PieceMovement(0, 1, 0, 0);
+				PieceMovement* to_front_left = new PieceMovement(0, 0, 1, 0, 0, 0, 0, 0);
+				PieceMovement* to_front_right = new PieceMovement(0, 0, 0, 0, 1, 0, 0, 0);
+				
+				to_front->set_only_not_empty(true);
+				to_front->set_is_fixed_squares(true);
+				to_front_left->set_is_fixed_squares(true);
+				to_front_right->set_is_fixed_squares(true);
+				
 				this->allowed_movements.push_back(to_front);
+				this->allowed_movements.push_back(to_front_right);
+				this->allowed_movements.push_back(to_front_left);
 			}
 		}
 

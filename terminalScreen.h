@@ -49,65 +49,32 @@ class Screen
 				Space* selected_piece_space = this->table[selected_piece_position->y][selected_piece_position->x];
 				Space* destination_piece_space = this->table[destination_piece_position->y][destination_piece_position->x];
 
-				movement_path.push_back(selected_piece_space);
-				
 				// populate moviment_path array with all spaces between the origen and the destination of the selected piece
-				if(selected_piece_position->y == destination_piece_position->y || selected_piece_position->x == destination_piece_position->y)
+			//
+				//movement_path.push_back(selected_piece_space);
+				//movement_path.push_back(destination_piece_space);
+				
+				// not working for diagonal movements
+				if(selected_piece_position->y < destination_piece_position->y || selected_piece_position->x < destination_piece_position->x) 
 				{
-					if(selected_piece_position->y == destination_piece_position->y)
+					for(int y = selected_piece_position->y; y <= destination_piece_position->y; y++)
 					{
-						if(selected_piece_position->x < destination_piece_position->x)
+						for(int x = selected_piece_position->x; x <= destination_piece_position->x; x++)
 						{
-							for(int x = selected_piece_position->x; x < destination_piece_position->x; x++)
-							{
-								movement_path.push_back(this->table[selected_piece_position->y][x]);
-							}
-						}
-						else
-						{
-							for(int x = selected_piece_position->x; x > destination_piece_position->x; x--)
-							{
-								movement_path.push_back(this->table[selected_piece_position->y][x]);
-							}
-						}
-					}
-					else
-					{
-						if(selected_piece_position->y < destination_piece_position->y)
-						{
-							for(int y = selected_piece_position->y; y < destination_piece_position->y; y++)
-							{
-								movement_path.push_back(this->table[y][selected_piece_position->x]);
-							}
-						}
-						else
-						{
-							for(int y = selected_piece_position->y; y > destination_piece_position->y; y--)
-							{
-								movement_path.push_back(this->table[y][selected_piece_position->x]);
-							}
+							movement_path.push_back(this->table[y][x]);
 						}
 					}
 				}
 				else
 				{
-					if(destination_piece_position->y > selected_piece_position->y)
+					for(int y = selected_piece_position->y; y >= destination_piece_position->y; y--)
 					{
-						for(int i = selected_piece_position->y; i < destination_piece_position->y; i++)
+						for(int x = selected_piece_position->x; x >= destination_piece_position->x; x--)
 						{
-							movement_path.push_back(this->table[i][i]);
-						}
-					}
-					else
-					{
-						for(int i = selected_piece_position->y; i > destination_piece_position->y; i--)
-						{
-							movement_path.push_back(this->table[i][i]);
+							movement_path.push_back(this->table[y][x]);
 						}
 					}
 				}
-
-				movement_path.push_back(destination_piece_space);
 
 				if(selected_piece_space->check_is_empty())
 				{
@@ -119,6 +86,12 @@ class Screen
 				}
 
 				Piece* selected_piece = selected_piece_space->get_piece();
+				
+				// validate piece path
+				for(Space* path_space: movement_path)
+				{
+					std::cout << "y: " << path_space->get_y() << " x: " << path_space->get_x() << "\n";
+				}
 				
 				// TODO: validate movement_path before moving the selected piece
 				selected_piece_space->remove_piece();

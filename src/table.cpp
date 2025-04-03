@@ -1,6 +1,8 @@
 #include <array>
+#include <vector>
 #include <cctype>
 #include "table.h"
+#include "table_position.h"
 
 std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> create_table(Player* player_one, Player* player_two)
 {
@@ -94,4 +96,22 @@ TablePosition* convert_input(std::string raw_input)
 	y -= 1;
 
 	return new TablePosition(x, y);
+}
+
+std::vector<Space*> generate_piece_movement_path(std::array<std::array<Space*, 8>, 8> table, TablePosition* origin, TablePosition* destination)
+{
+	std::vector<Space*> movement_path;
+	
+	bool is_selected_y_higher_destination_y = origin->y < destination->y;
+	bool is_selected_x_higher_destination_x = origin->x < destination->x;
+
+	for(int y = origin->y; is_selected_y_higher_destination_y ? y <= destination->y : y >= destination->y ; is_selected_y_higher_destination_y ? y++ : y--)
+	{
+		for(int x = origin->x;is_selected_x_higher_destination_x ? x <= destination->x : x >= destination->x; is_selected_x_higher_destination_x ? x++ : x--)
+		{
+			movement_path.push_back(table[y][x]);
+		}
+	}
+
+	return movement_path;
 }

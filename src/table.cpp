@@ -1,6 +1,7 @@
 #include <array>
 #include <vector>
 #include <cctype>
+#include <iostream>
 #include "table.h"
 #include "table_position.h"
 
@@ -98,7 +99,7 @@ TablePosition* convert_input(std::string raw_input)
 	return new TablePosition(x, y);
 }
 
-std::vector<Space*> generate_piece_movement_path(std::array<std::array<Space*, 8>, 8> table, TablePosition* origin, TablePosition* destination)
+std::vector<Space*> generate_piece_movement_path(std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table, TablePosition* origin, TablePosition* destination)
 {
 	std::vector<Space*> movement_path;
 	

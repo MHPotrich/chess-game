@@ -5,15 +5,16 @@
 #include "console_user_interface.h"
 #include "space.h"
 #include "player.h"
+#include "table.h"
 #include "table_position.h"
 
-void show_table(std::array<std::array<Space*, 8>, 8> table, std::optional<TablePosition*> selected_piece_position)
+void show_table(std::array<std::array<Space*, Y_TABLE_SIZE>, X_TABLE_SIZE> table, std::optional<TablePosition*> selected_piece_position)
 {
-	for(int y = 0; y < 8; y++)
+	for(int y = 0; y < Y_TABLE_SIZE; y++)
 	{
 		std::cout << y + 1;
 
-		for(int x = 0; x < 8; x++)
+		for(int x = 0; x < X_TABLE_SIZE; x++)
 		{
 			if(!table[y][x]->check_is_empty())
 			{
@@ -38,35 +39,39 @@ void show_table(std::array<std::array<Space*, 8>, 8> table, std::optional<TableP
 	}
 
 	std::cout << "  a  b  c  d  e  f  g  h" << std::endl << std::endl;
-}
+};
 
 void show_player_info(Player* player, std::string player_name)
 {
 	std::cout << "remaning pieces " << player_name << ": " << player->get_total_pieces() << "\n";
-}
+};
 
 void show_control_piece(std::string* input_value, bool is_piece_selected)
 {
+	std::string temp_input_value;
+
 	if(is_piece_selected)
 	{
 		std::cout << "move to(example of input: 1b): ";
-		std::cin >> *input_value;
+		std::cin >> temp_input_value;
+		*input_value = temp_input_value;
 
 		return;
 	}
 
 	std::cout << "select piece(example of input: 1b): ";
-	std::cin >> *input_value;
+	std::cin >> temp_input_value;
+	*input_value = temp_input_value;
 	std::cout << std::endl;
-}
+};
 
 void clear_console()
 {
 
-}
+};
 
 void show_not_piece_warning()
 {
 	std::cout << "There's not piece in this square!" << "\n";
 	std::cout << "\n";
-}
+};

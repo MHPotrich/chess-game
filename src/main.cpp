@@ -12,8 +12,8 @@ void main_game()
 	Player* player_one = new Player(WHITE);
 	Player* player_two = new Player(BLACK);
 	std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table = create_table(player_one, player_two);
-	std::string* input_select_piece;
-	std::string* input_move_piece;
+	std::string* input_select_piece = new std::string();
+	std::string* input_move_piece = new std::string();
 	std::optional<TablePosition*> selected_piece_position;
 	std::optional<TablePosition*> destination_piece_position;
 	std::optional<Space*> selected_piece_space;
@@ -27,7 +27,7 @@ void main_game()
 		show_table(table, selected_piece_position);
 		std::cout << "\n";
 
-		if(input_select_piece->length() == 0)
+		if(input_select_piece->empty())
 		{
 			show_control_piece(input_select_piece, false);
 			selected_piece_position = std::make_optional(convert_input(*input_select_piece));
@@ -84,7 +84,7 @@ void main_game()
 			destination_piece_space.reset();
 		}
 	}
-}
+};
 
 int main()
 {
@@ -93,4 +93,4 @@ int main()
 	}
 
 	return 0;
-}
+};

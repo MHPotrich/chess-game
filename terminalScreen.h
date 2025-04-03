@@ -50,29 +50,14 @@ class Screen
 				Space* destination_piece_space = this->table[destination_piece_position->y][destination_piece_position->x];
 
 				// populate moviment_path array with all spaces between the origen and the destination of the selected piece
-			//
-				//movement_path.push_back(selected_piece_space);
-				//movement_path.push_back(destination_piece_space);
-				
-				// not working for diagonal movements
-				if(selected_piece_position->y < destination_piece_position->y || selected_piece_position->x < destination_piece_position->x) 
+				bool is_selected_y_higher_destination_y = selected_piece_position->y < destination_piece_position->y;
+				bool is_selected_x_higher_destination_x = selected_piece_position->x < destination_piece_position->x;
+
+				for(int y = selected_piece_position->y; is_selected_y_higher_destination_y ? y <= destination_piece_position->y : y >= destination_piece_position->y ; is_selected_y_higher_destination_y ? y++ : y--)
 				{
-					for(int y = selected_piece_position->y; y <= destination_piece_position->y; y++)
+					for(int x = selected_piece_position->x;is_selected_x_higher_destination_x ? x <= destination_piece_position->x : x >= destination_piece_position->x; is_selected_x_higher_destination_x ? x++ : x--)
 					{
-						for(int x = selected_piece_position->x; x <= destination_piece_position->x; x++)
-						{
-							movement_path.push_back(this->table[y][x]);
-						}
-					}
-				}
-				else
-				{
-					for(int y = selected_piece_position->y; y >= destination_piece_position->y; y--)
-					{
-						for(int x = selected_piece_position->x; x >= destination_piece_position->x; x--)
-						{
-							movement_path.push_back(this->table[y][x]);
-						}
+						movement_path.push_back(this->table[y][x]);
 					}
 				}
 
@@ -86,11 +71,30 @@ class Screen
 				}
 
 				Piece* selected_piece = selected_piece_space->get_piece();
+
+				
 				
 				// validate piece path
 				for(Space* path_space: movement_path)
 				{
 					std::cout << "y: " << path_space->get_y() << " x: " << path_space->get_x() << "\n";
+					
+					// destination square
+					if(destination_piece_space->get_x() == path_space->get_x() && destination_piece_space->get_y() == path_space->get_y())
+					{
+						
+					}
+					
+					// origin square
+					else if(selected_piece_space->get_x() == path_space->get_x() && selected_piece_space->get_y() == path_space->get_y())
+					{
+
+					}
+
+					else
+					{
+						if(path_space->check_is_empty()) return;
+					}
 				}
 				
 				// TODO: validate movement_path before moving the selected piece

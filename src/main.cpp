@@ -45,6 +45,7 @@ void main_game()
 		{
 			show_control_piece(input_move_piece, true);
 			destination_piece_position = std::make_optional(convert_input(*input_move_piece));
+			destination_piece_space = std::make_optional(table[destination_piece_position.value()->y][destination_piece_position.value()->x]);
 
 			Piece* selected_piece = selected_piece_space.value()->get_piece();
 			std::vector<Space*> movement_path = generate_piece_movement_path(table, selected_piece_position.value(), destination_piece_position.value());
@@ -53,27 +54,10 @@ void main_game()
 			for(Space* path_space: movement_path)
 			{
 				std::cout << "y: " << path_space->get_y() << " x: " << path_space->get_x() << "\n";
-
-				// destination square
-				if(destination_piece_space.value()->get_x() == path_space->get_x() && destination_piece_space.value()->get_y() == path_space->get_y())
-				{
-					
-				}
-
-				// origin square
-				else if(selected_piece_space.value()->get_x() == path_space->get_x() && selected_piece_space.value()->get_y() == path_space->get_y())
-				{
-
-				}
-
-				else
-				{
-					if(path_space->check_is_empty()) return;
-				}
 			}
 
-			selected_piece_space.value()->remove_piece();
 			destination_piece_space.value()->change_piece(selected_piece);
+			selected_piece_space.value()->remove_piece();
 
 			// after move piece, reset input values, position and piece
 			input_select_piece->clear();

@@ -1,7 +1,6 @@
 #include <array>
 #include <vector>
 #include <cctype>
-#include <iostream>
 #include "table.h"
 #include "table_position.h"
 

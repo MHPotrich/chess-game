@@ -29,7 +29,7 @@ class Piece
 				PieceMovement* to_front_left = new PieceMovement(0, 0, 1, 0, 0, 0, 0, 0);
 				PieceMovement* to_front_right = new PieceMovement(0, 0, 0, 0, 1, 0, 0, 0);
 				
-				to_front->set_only_not_empty(true);
+				to_front->set_allow_jump_piece(true);
 				to_front->set_is_fixed_squares(true);
 				to_front_left->set_is_fixed_squares(true);
 				to_front_right->set_is_fixed_squares(true);

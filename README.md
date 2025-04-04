@@ -2,7 +2,7 @@
 A chess game that can be played through the terminal.
 
 ## Compilation
-`$ g++ -o chess ./src/table.cpp ./src/space.cpp ./src/console_user_interface.cpp ./src/main.cpp`
+`$ g++ -o chess ./src/table.cpp ./src/space.cpp ./src/console_user_interface.cpp ./src/piece_movement.cpp ./src/main.cpp`
 
 ## To do
 - [x] show table with both players pieces.

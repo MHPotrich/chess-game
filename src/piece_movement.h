@@ -1,6 +1,7 @@
 #ifndef PIECE_MOVEMENT_H
 #define PIECE_MOVEMENT_H
 
+#include <vector>
 class PieceMovement
 {
 	private:
@@ -13,7 +14,7 @@ class PieceMovement
 		int back_left_squares = 0;
 		int back_right_squares = 0;
 		bool is_fixed_squares = false;
-		bool only_not_empty = false;
+		bool allow_jump_piece = false;
 
 	public:
 		PieceMovement(int left, int front, int right, int back)
@@ -41,10 +42,28 @@ class PieceMovement
 			this->is_fixed_squares = new_value;
 		}
 
-		void set_only_not_empty(bool new_value)
+		void set_allow_jump_piece(bool new_value)
 		{
-			this->only_not_empty = new_value;
+			this->allow_jump_piece = new_value;
 		}
+
+		bool match_movement(int left, int front, int right, int back, bool is_fixed_squares)
+		{
+			return (this->left_squares == left && this->front_squares == front && this->right_squares == right && this->back_squares == back && this->is_fixed_squares == is_fixed_squares);
+		}
+
+		bool match_movement(int back_left, int left, int front_left, int front, int front_right, int right, int back_right, int back, bool is_fixed_squares)
+		{
+			return false;
+		}
+
+		bool get_allow_jump_piece()
+		{
+			return this->allow_jump_piece;
+		}
+
 };
+
+PieceMovement* find_piece_movement(std::vector<PieceMovement*> allowed_movements, int movement_front, int movement_side);
 
 #endif /* PIECE_MOVEMENT_H */

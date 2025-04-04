@@ -1,6 +1,7 @@
 #ifndef SPACE_H
 #define SPACE_H
 
+#include <vector>
 #include <optional>
 #include "piece.h"
 
@@ -57,5 +58,7 @@ class Space
 			return this->y_position;
 		}
 };
+
+bool is_piece_movement_valid(Space* origin, Space* destination, std::vector<Space*> movement_path);
 
 #endif /* SPACE_H */

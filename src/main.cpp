@@ -2,6 +2,7 @@
 #include <iostream>
 #include <optional>
 #include "player.h"
+#include "space.h"
 #include "table.h"
 #include "console_user_interface.h"
 #include "table_position.h"
@@ -50,14 +51,11 @@ void main_game()
 			Piece* selected_piece = selected_piece_space.value()->get_piece();
 			std::vector<Space*> movement_path = generate_piece_movement_path(table, selected_piece_position.value(), destination_piece_position.value());
 
-			// validate piece path
-			for(Space* path_space: movement_path)
+			if(is_piece_movement_valid(selected_piece_space.value(), destination_piece_space.value(), movement_path))
 			{
-				std::cout << "y: " << path_space->get_y() << " x: " << path_space->get_x() << "\n";
+				destination_piece_space.value()->change_piece(selected_piece);
+				selected_piece_space.value()->remove_piece();
 			}
-
-			destination_piece_space.value()->change_piece(selected_piece);
-			selected_piece_space.value()->remove_piece();
 
 			// after move piece, reset input values, position and piece
 			input_select_piece->clear();

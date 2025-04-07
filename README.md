@@ -10,3 +10,4 @@ A chess game that can be played through the terminal.
 - [ ] change the table point of view for each round.
 - [ ] show possible action after player select the piece.
 - [ ] make possible to win and lose.
+- [ ] make possible to play with other person by LAN

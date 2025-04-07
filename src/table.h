@@ -24,4 +24,6 @@ TablePosition* convert_input(std::string raw_input);
 
 std::vector<Space*> generate_piece_movement_path(std::array<std::array<Space*, 8>, 8> table, TablePosition* origin, TablePosition* destination);
 
+void delete_table_space(std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table);
+
 #endif /* TABLE_H */

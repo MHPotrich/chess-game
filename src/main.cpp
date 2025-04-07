@@ -66,6 +66,16 @@ void main_game()
 			destination_piece_space.reset();
 		}
 	}
+
+	delete_table_space(table);
+	delete input_select_piece;
+	delete input_move_piece;
+	delete selected_piece_space.value();
+	delete selected_piece_position.value();
+	delete destination_piece_space.value();
+	delete destination_piece_position.value();
+	delete player_one;
+	delete player_two;
 };
 
 int main()

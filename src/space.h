@@ -20,6 +20,11 @@ class Space
 			this->y_position = y;
 		}
 
+		~Space()
+		{
+			delete this->piece.value();
+		}
+
 		bool check_is_empty()
 		{
 			return is_empty;

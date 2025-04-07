@@ -40,6 +40,11 @@ class Piece
 			}
 		}
 
+		~Piece()
+		{
+			delete this->owner;
+		}
+
 		int get_color()
 		{
 			return this->color;

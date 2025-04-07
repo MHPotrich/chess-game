@@ -115,3 +115,14 @@ std::vector<Space*> generate_piece_movement_path(std::array<std::array<Space*, X
 
 	return movement_path;
 }
+
+void delete_table_space(std::array<std::array<Space*, X_TABLE_SIZE>, Y_TABLE_SIZE> table)
+{
+	for(auto row: table)
+	{
+		for(auto *space: row)
+		{
+			delete space;
+		}
+	}
+}

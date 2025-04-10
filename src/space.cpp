@@ -8,7 +8,7 @@ bool is_piece_movement_valid(Space* origin, Space* destination, std::vector<Spac
 {
 	Piece* piece = origin->get_piece();
 	int movement_front = origin->get_y() - destination->get_y();
-	int movement_side = origin->get_x() - destination->get_y();
+	int movement_side = origin->get_x() - destination->get_x();
 	PieceMovement* this_piece_movement = find_piece_movement(piece->get_allowed_movements(), movement_front, movement_side);
 
 	if(this_piece_movement == nullptr) return false;

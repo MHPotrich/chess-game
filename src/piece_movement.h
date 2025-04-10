@@ -2,6 +2,7 @@
 #define PIECE_MOVEMENT_H
 
 #include <vector>
+
 class PieceMovement
 {
 	private:

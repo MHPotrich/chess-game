@@ -38,6 +38,63 @@ class Piece
 				this->allowed_movements.push_back(to_front_right);
 				this->allowed_movements.push_back(to_front_left);
 			}
+
+			if(name == "king")
+			{
+				PieceMovement* to_front = new PieceMovement(0, 1, 0, 0);
+				PieceMovement* to_left = new PieceMovement(1, 0, 0, 0);
+				PieceMovement* to_right = new PieceMovement(0, 0, 1, 0);
+				PieceMovement* to_back = new PieceMovement(0, 0, 0, 1);
+				PieceMovement* to_front_left = new PieceMovement(0, 0, 1, 0, 0, 0, 0, 0);
+				PieceMovement* to_front_right = new PieceMovement(0, 0, 0, 0, 1, 0, 0, 0);
+				PieceMovement* to_back_left = new PieceMovement(1, 0, 0, 0, 0, 0, 0, 0);
+				PieceMovement* to_back_right = new PieceMovement(0, 0, 0, 0, 0, 0, 1, 0);
+
+				this->allowed_movements.push_back(to_front);
+				this->allowed_movements.push_back(to_left);
+				this->allowed_movements.push_back(to_right);
+				this->allowed_movements.push_back(to_back);
+				this->allowed_movements.push_back(to_front_left);
+				this->allowed_movements.push_back(to_front_right);
+				this->allowed_movements.push_back(to_back_left);
+				this->allowed_movements.push_back(to_back_right);
+			}
+
+			if(name == "rook")
+			{
+				PieceMovement* to_front = new PieceMovement(0, 8, 0, 0);
+				PieceMovement* to_left = new PieceMovement(8, 0, 0, 0);
+				PieceMovement* to_right = new PieceMovement(0, 0, 8, 0);
+				PieceMovement* to_back = new PieceMovement(0, 0, 0, 8);
+
+				this->allowed_movements.push_back(to_front);
+				this->allowed_movements.push_back(to_left);
+				this->allowed_movements.push_back(to_right);
+				this->allowed_movements.push_back(to_back);
+			}
+
+			if(name == "bishop")
+			{
+				PieceMovement* to_front_left = new PieceMovement(0, 0, 8, 0, 0, 0, 0, 0);
+				PieceMovement* to_front_right = new PieceMovement(0, 0, 0, 0, 8, 0, 0, 0);
+				PieceMovement* to_back_left = new PieceMovement(8, 0, 0, 0, 0, 0, 0, 0);
+				PieceMovement* to_back_right = new PieceMovement(0, 0, 0, 0, 0, 0, 8, 0);
+
+				this->allowed_movements.push_back(to_front_left);
+				this->allowed_movements.push_back(to_front_right);
+				this->allowed_movements.push_back(to_back_left);
+				this->allowed_movements.push_back(to_back_right);
+			}
+
+			if(name == "knight")
+			{
+
+			}
+
+			if(name == "queen")
+			{
+
+			}
 		}
 
 		~Piece()
